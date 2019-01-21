@@ -2,8 +2,65 @@
 Treehouse Techdegree:
 FSJS project 2 - List Filter and Pagination
 ******************************************/
-   
+
+// jshint esversion:6
+
+
 // Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
+
+// get the entire page
+const pageDiv = document.querySelector('.page');
+
+// get the student ul
+const studentList = document.querySelector('.student-list');
+
+// get my list of all student list elements
+const students = document.getElementsByClassName('student-item');
+// check out the length
+console.log(students.length);
+
+// get a constant for number of pages I'll need
+const numberOfPages = Math.ceil(students.length / 10)
+
+
+
+/*****************************************
+ * let's create the page button elements *
+ * ***************************************/
+
+function createPagination() {
+   // First, the unordered list for the pages
+   const paginationList = document.createElement('ul');
+
+   // Loop to build the list items
+   for (let i = 0; i < numberOfPages; i += 1) {
+      const paginationItem = document.createElement('li');
+      // do the a tag
+      const paginationTag = document.createElement('a');
+      paginationTag.textContent = i + 1;
+      paginationTag.href = '#';
+      paginationItem.appendChild(paginationTag);
+      // now put the li items in the ul
+      paginationList.appendChild(paginationItem);
+   };
+
+   // create a paginationDiv
+   const paginationDiv = document.createElement('div');
+   paginationDiv.className = 'pagination';
+
+   // put the ul in the div
+   paginationDiv.appendChild(paginationList);
+   console.log(pageDiv);
+
+   // place the div after the student ul
+   pageDiv.appendChild(paginationDiv);
+}
+
+createPagination();
+
+
+
+
 
 
 /*** 
@@ -16,8 +73,6 @@ FSJS project 2 - List Filter and Pagination
    will only be used inside of a function, then it can be locally 
    scoped to that function.
 ***/
-
-
 
 
 /*** 
