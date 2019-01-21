@@ -8,6 +8,11 @@ FSJS project 2 - List Filter and Pagination
 
 // Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
 
+
+/************************
+ * Page Level Constants *
+ ************************/
+
 // get the entire page
 const pageDiv = document.querySelector('.page');
 
@@ -16,11 +21,41 @@ const studentList = document.querySelector('.student-list');
 
 // get my list of all student list elements
 const students = document.getElementsByClassName('student-item');
-// check out the length
+// check out the length and set a const
 console.log(students.length);
+const numberOfStudents = students.length;
 
 // get a constant for number of pages I'll need
 const numberOfPages = Math.ceil(students.length / 10)
+
+
+const page = 1;
+
+let minStudent = (page * 10) - 10;
+console.log(minStudent);
+let maxStudent = (page * 10) - 1;
+console.log(maxStudent);
+
+
+// This will remove and display my student list elements
+for (let i = 0; i < numberOfStudents; i++) {
+   if (i >= minStudent && i <= maxStudent) {
+      students[i].style.display = 'block';
+   } else {
+      students[i].style.display = 'none';
+   }
+};
+
+
+// console.log("it's - " + numberOfStudents);
+
+
+
+// Let's just try filtering to page 1
+
+
+
+
 
 
 
@@ -50,7 +85,6 @@ function createPagination() {
 
    // put the ul in the div
    paginationDiv.appendChild(paginationList);
-   console.log(pageDiv);
 
    // place the div after the student ul
    pageDiv.appendChild(paginationDiv);
