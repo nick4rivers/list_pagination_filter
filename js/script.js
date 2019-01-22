@@ -15,58 +15,42 @@ FSJS project 2 - List Filter and Pagination
 
 // get the entire page
 const pageDiv = document.querySelector('.page');
-
 // get the student ul
 const studentList = document.querySelector('.student-list');
-
 // get my list of all student list elements
 const students = document.getElementsByClassName('student-item');
-// check out the length and set a const
-console.log(students.length);
-const numberOfStudents = students.length;
-
 // get a constant for number of pages I'll need
 const numberOfPages = Math.ceil(students.length / 10)
 
-
-const page = 1;
-
-let minStudent = (page * 10) - 10;
-console.log(minStudent);
-let maxStudent = (page * 10) - 1;
-console.log(maxStudent);
+// will set dynamically later
+let page = 1;
 
 
-// This will remove and display my student list elements
-for (let i = 0; i < numberOfStudents; i++) {
-   if (i >= minStudent && i <= maxStudent) {
-      students[i].style.display = 'block';
-   } else {
-      students[i].style.display = 'none';
-   }
-};
+function showPage(page, items) {
+   let minStudent = (page * 10) - 10;
+   let maxStudent = (page * 10) - 1;
+   // loop and set display
+   for (let i = 0; i < items.length; i++) {
+      if (i >= minStudent && i <= maxStudent) {
+         items[i].style.display = 'block';
+      } else {
+         items[i].style.display = 'none';
+      }
+   };
+}
 
-
-// console.log("it's - " + numberOfStudents);
-
-
-
-// Let's just try filtering to page 1
-
-
-
-
-
+showPage(page, students);
 
 
 /*****************************************
  * let's create the page button elements *
  * ***************************************/
 
+const paginationList = document.createElement('ul');
+
 function createPagination() {
    // First, the unordered list for the pages
-   const paginationList = document.createElement('ul');
-
+   
    // Loop to build the list items
    for (let i = 0; i < numberOfPages; i += 1) {
       const paginationItem = document.createElement('li');
@@ -74,6 +58,9 @@ function createPagination() {
       const paginationTag = document.createElement('a');
       paginationTag.textContent = i + 1;
       paginationTag.href = '#';
+      if (paginationTag.textContent == page) {
+         paginationTag.className = "active";
+      }
       paginationItem.appendChild(paginationTag);
       // now put the li items in the ul
       paginationList.appendChild(paginationItem);
@@ -89,12 +76,26 @@ function createPagination() {
    // place the div after the student ul
    pageDiv.appendChild(paginationDiv);
 }
-
 createPagination();
 
+/*****************************************
+ * Now let's add the button functionality *
+ * ***************************************/
 
+ paginationList.addEventListener('click', (e) => {
+   e.preventDefault();
+   page = e.target.textContent;
+   showPage(page, students);
 
-
+   // reset the links
+   const linksLength = paginationList.children.length;
+   const links = paginationList.children
+   for (let i = 0; i < linksLength; i++) {
+      links[i].firstChild.classList.remove('active');
+   }
+   // and add active where it matches
+   e.target.className = 'active';
+ });
 
 
 /*** 
