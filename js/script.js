@@ -21,7 +21,6 @@ const numberOfPages = Math.ceil(students.length / 10)
 // get the page header to append the search bar
 const pageHeader = document.querySelector('.page-header');
 
-
 // start at page 1
 let page = 1;
 
@@ -67,6 +66,29 @@ searchDiv.appendChild(searchButton);
 
 // append to the page header
 pageHeader.appendChild(searchDiv);
+
+
+/*/******************************************
+ * search bar functionality                 *
+ * *****************************************/
+
+// get the text input on submit
+searchInput.addEventListener('keyup', (e) => {
+   e.preventDefault();
+   // get the value
+   const searchTerm = e.target.value.toLowerCase();
+   Array.from(students).forEach(function(student) {
+      const searchName = student.getElementsByTagName('h3')[0].textContent;
+      if(searchName.toLowerCase().indexOf(searchTerm) != -1) {
+         student.style.display = 'block';
+      } else {
+         student.style.display = 'none';
+      }
+   });
+});
+
+
+// update pagination code to run on new collection
 
 
 
