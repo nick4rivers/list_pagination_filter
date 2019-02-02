@@ -1,3 +1,6 @@
+/* jshint esversion: 6 */
+
+
 /******************************************
 Treehouse Techdegree:
 FSJS project 2 - List Filter and Pagination
@@ -12,12 +15,10 @@ FSJS project 2 - List Filter and Pagination
 
 // get the entire page
 const pageDiv = document.querySelector('.page');
-// get the student ul
-const studentList = document.querySelector('.student-list');
 // get my list of all student list elements
 const students = document.getElementsByClassName('student-item');
 // get a constant for number of pages I'll need
-const numberOfPages = Math.ceil(students.length / 10)
+const numberOfPages = Math.ceil(students.length / 10);
 // get the page header to append the search bar
 const pageHeader = document.querySelector('.page-header');
 
@@ -41,7 +42,7 @@ function showPage(page, items) {
       } else {
          items[i].style.display = 'none';
       }
-   };
+   }
 }
 
 /*/*******************************************
@@ -114,7 +115,7 @@ function createPagination() {
       paginationItem.appendChild(paginationTag);
       // now put the li items in the ul
       paginationList.appendChild(paginationItem);
-   };
+   }
 
    // create a paginationDiv
    const paginationDiv = document.createElement('div');
@@ -139,7 +140,7 @@ createPagination();
 
    // reset the links by looping to each one
    const linksLength = paginationList.children.length;
-   const links = paginationList.children
+   const links = paginationList.children;
    for (let i = 0; i < linksLength; i++) {
       links[i].firstChild.classList.remove('active');
    }
